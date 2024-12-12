@@ -21,35 +21,8 @@
         </dependency>
     </dependencies>
 
-    <reporting>
-        <plugins>
-            <!-- Existing plugins -->
-
-            <!-- JaCoCo plugin for code coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal> <!-- Prepare JaCoCo agent -->
-                        </goals>
-                    </execution>
-                    <execution>
-                        <goals>
-                            <goal>report</goal> <!-- Generate code coverage report -->
-                        </goals>
-                        <phase>verify</phase> <!-- Runs after tests -->
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <profiles>
         <!-- Existing profiles -->
-
     </profiles>
 
     <build>
@@ -69,42 +42,4 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.19.1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-        <plugins>
-            <!-- Existing plugins -->
-
-            <!-- JaCoCo plugin added in the build plugins section -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <phase>verify</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+   
