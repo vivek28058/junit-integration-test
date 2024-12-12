@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'adoptopenjdk'
+        distribution: 'temurin'  # Use temurin instead of adoptopenjdk
 
     # Step 3: Cache Maven dependencies
     - name: Cache Maven dependencies
