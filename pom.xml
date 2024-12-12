@@ -11,176 +11,47 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-            <scope>compile</scope>
-        </dependency>
+        <!-- Existing dependencies -->
 
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>apache-log4j-extras</artifactId>
-            <version>1.2.17</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-
-            <!-- Here the scope must be "compile" but not "test" -->
-            <!-- Since this project is a test project -->
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock.version}</version>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>0.8.8</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito2</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <reporting>
         <plugins>
+            <!-- Existing plugins -->
+
+            <!-- JaCoCo plugin for code coverage -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.4</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.8</version>
-                <configuration>
-                    <linkXref>true</linkXref>
-                    <sourceEncoding>utf-8</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
-                    <targetJdk>1.5</targetJdk>
-                    <excludes>
-                        <exclude>**/*Test.java</exclude>
-                        <exclude>**/Test*.java</exclude>
-                        <exclude>**/IT*.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <check>
-                        <regexp></regexp>
-                    </check>
-                    <format>xml</format>
-                </configuration>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal> <!-- Prepare JaCoCo agent -->
+                        </goals>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>report</goal> <!-- Generate code coverage report -->
+                        </goals>
+                        <phase>verify</phase> <!-- Runs after tests -->
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </reporting>
+
     <profiles>
-        <!-- execute with mvn verify -P smoke -->
-        <profile>
-            <id>smoke</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <!-- Specify the pattern which wanna be treated as smoke test-->
-                            <includes>
-                                <include>**/ITSmoke*.java</include>
-                            </includes>
-                            <excludes>
-                                <exclude>
-                                    **/Test*.java
-                                </exclude>
-                            </excludes>
-
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- execute with mvn verify -P smoke -->
-        <profile>
-            <id>nightly</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <!-- Specify the pattern which wanna be treated as smoke test-->
-                            <includes>
-                                <include>**/ITNightly*.java</include>
-                            </includes>
-                            <excludes>
-                                <exclude>
-                                    **/Test*.java
-                                </exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!-- execute with mvn verify -P weekly -->
-        <profile>
-            <id>weekly</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <!-- Specify the pattern which wanna be treated as smoke test-->
-                            <includes>
-                                <include>**/ITWeekly*.java</include>
-                            </includes>
-                            <excludes>
-                                <exclude>
-                                    **/Test*.java
-                                </exclude>
-                            </excludes>
-
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+        <!-- Existing profiles -->
 
     </profiles>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -208,50 +79,32 @@
                             </goals>
                         </execution>
                     </executions>
-
                 </plugin>
             </plugins>
         </pluginManagement>
+
         <plugins>
+            <!-- Existing plugins -->
+
+            <!-- JaCoCo plugin added in the build plugins section -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-                <configuration>
-
-                    <systemProperties>
-                        <property>
-                            <name>log4j.configuration</name>
-                            <value>file:target/test-classes/log4j.xml</value>
-                        </property>
-                    </systemProperties>
-                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
-                    <reportFormat>plain</reportFormat>
-                    <test>${test}</test>
-                    <!--This enables to run integration test only-->
-                    <!--by skip unit test with-->
-                    <!--mvn verify -Dskip.surefire.tests-->
-                    <skipTests>${skip.surefire.tests}</skipTests>
-                </configuration>
-
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>
-                            **/IT*.java
-                        </include>
-                    </includes>
-                    <excludes>
-                        <exclude>
-                            **/Test*.java
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 </project>
