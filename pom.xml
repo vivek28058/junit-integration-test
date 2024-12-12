@@ -42,4 +42,42 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-   
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- Existing plugins -->
+
+            <!-- JaCoCo plugin added only in the build section -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal> <!-- Prepares the JaCoCo agent to collect code coverage -->
+                        </goals>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>report</goal> <!-- Generates the coverage report after tests -->
+                        </goals>
+                        <phase>verify</phase> <!-- Runs the report goal after tests -->
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
